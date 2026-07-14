@@ -33,13 +33,13 @@ npm run report
 
 | File | Scope |
 |------|-------|
-| `auth.smoke.spec.ts` | Register + logout, invalid login |
+| `auth.smoke.spec.ts` | Register + logout, successful login, invalid login |
 | `todo-core.spec.ts` | Create/delete list, create/delete item, edit item, edit list name |
 | `sharing.spec.ts` | Owner shares a list, recipient views items, viewer add-item negative |
 
 ## Known AUT Faults
 
-All 9 tests pass. No tests are expected to fail.
+All 10 tests pass. No tests are expected to fail.
 
 - The viewer add-item test (`sharing.spec.ts`) documents a bug (bug-report-1.md): the "New task" button is shown to viewers but item creation silently fails. The test asserts the correct backend behaviour. No item is created, therefore it passes.
 - The non-owner share bug (bug-report-2.md) is covered at the API level only.

@@ -1,0 +1,31 @@
+.select-input {
+  &.solid-select-container {
+    @apply dark:bg-gray-900 border-slate-200 hover:border-slate-300 focus:border-sky-600/50 dark:border-slate-800 dark:hover:border-slate-700;
+    outline: none;
+   }
+  .solid-select-control {
+    @apply border-slate-200 hover:border-slate-300 focus:border-sky-600/50 dark:border-slate-800 dark:hover:border-slate-700;
+    outline: none;
+
+    .solid-select-multi-value {
+      @apply bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200;
+    }
+  }
+  .solid-select-placeholder {
+    @apply text-slate-500;
+  }
+  .solid-select-option {
+    &:hover {
+      @apply bg-slate-100 dark:bg-slate-800
+    }
+    &[data-focused="true"] {
+      @apply bg-slate-100 dark:bg-slate-800
+    }
+  }
+}
+
+.select-input-error {
+  .solid-select-control {
+    @apply border-red-500 hover:border-red-600 focus:border-red-600/50
+  }
+}

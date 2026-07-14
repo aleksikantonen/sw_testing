@@ -31,6 +31,7 @@ test.describe('Authentication @smoke', () => {
     await page.getByRole('button', { name: 'Login' }).click()
 
     // successful login lands on the home view
+    await expect(page).toHaveURL(/\/$/)
     await expect(page.getByRole('heading', { name: 'My todo lists' })).toBeVisible()
   })
 

@@ -1,0 +1,46 @@
+name: E2E full testing suite
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  e2e-full:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Start app
+        run: docker compose up -d --build --wait
+        timeout-minutes: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: e2e-tests/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: e2e-tests
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+        working-directory: e2e-tests
+
+      - name: Run full E2E suite
+        run: npx playwright test --reporter=line
+        working-directory: e2e-tests
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-nightly-results
+          path: e2e-tests/test-results/
+          retention-days: 14
